@@ -3,6 +3,34 @@ import random
 from time import sleep
 colunas, linhas = os.get_terminal_size()
 carinha1 = r""" :( """ ; carinha2 = r""" :/ """ ; carinha3 = r""" :) """
+cidade = r"""                                  ___________
+   ____________                  |  ___      |       _________
+  |            |                 | |   |     |      | = = = = |
+  | |   |   |  |                 | |   |     |      |         |
+  |            |                 |  --- ___  |      | |  || | |
+  | |   |   |  |                 |     |   | |      |         |
+  |            |        _______  |     |   | |      | |  || | |
+  | |   |   |  |       /_____/ \ |      ---  |      |         |
+  |            |       |+ ++|  | |  |~~~~~~| |      | |  || | |
+  |            |       |+ ++|  | |  |~~~~~~| |      | |  || | |
+~~|    (~~~~~) |~~~~~ ~| H  |_ |~|  | |||| | |~~~~~~|         |
+  |    ( ||| ) |       ~~~~~~    |  | |||| | |      | ||||||| |
+  ~~~~~~~~~~~~~________/  /_____ |  | |||| | |      | ||||||| |
+                                 ~~~~~~~~~~~~~      ~~~~~~~~~~~"""
+cidadefogos = r"""                                  ___________  .''.            
+   ____________   .:,      '.\'/.|  ___      |:_\/_: _________ 
+  |            |.'.;.`.    -= o =| |\o/|     |: /\ :| = = = = |
+  | |   |   |  | `,:.'     .'/.\'| | | |     | '..' |         |
+  |            |  ,            : |  --- ___  |    ; | | ||o/| |
+  | |   |\o/|  | ,              ,|     |   | |     '|         |
+  |            |,       _______  |     |\o/| |      | |  || | |
+  | |   |   |  |       /_____/ \ |      ---  |      |         |
+  |            |       |+ ++|  | |  |~~~~~~| |      | |  || | |
+  |            |       |+ ++|  | |  |~~~~~~| |      | |\o|| | |
+~~|    (~~~~~) |~~~~~~~| H  |_ |~|  | |||| | |~~~~~~|         |
+  |    ( ||| ) |       ~~~~~~    |  | |||| | |      | ||||||| |
+  ~~~~~~~~~~~~~________/  /_____ |  | |||| | |      | ||||||| |
+                                 ~~~~~~~~~~~~~      ~~~~~~~~~~~"""
 sortudo = r"""___________________________________
 |#######====================#######|
 |#(1)*BANCO AUXILIAR DO BRASIL*(1)#|
@@ -51,12 +79,18 @@ cigarro = r"""            .-.
   ( /. /
    .`.'.
    `'``"""
-s = r"""   _____ _           __           _        _____                         _____      _           
-  / ____| |         / _|         | |      |  __ \                       / ____|    (_)          
- | |    | |__   ___| |_ ___    __| | ___  | |__) |__  _   _  ___ __ _  | |     ___  _ ___  __ _ 
- | |    | '_ \ / _ \  _/ _ \  / _` |/ _ \ |  ___/ _ \| | | |/ __/ _` | | |    / _ \| / __|/ _` |
- | |____| | | |  __/ ||  __/ | (_| |  __/ | |  | (_) | |_| | (_| (_| | | |___| (_) | \__ \ (_| |
-  \_____|_| |_|\___|_| \___|  \__,_|\___| |_|   \___/ \__,_|\___\__,_|  \_____\___/|_|___/\__,_|"""
+s = r"""
+
+  _______                                            _______                           _______                       
+ |       |                                          |   _   |                         |       |                      
+ |    ___|                              __          |  |_|  |                         |    ___|                      
+ |   |    __ __        ____            |  |         |   ____|                         |   |          __              
+ |   |___|  |  |-----./  _|-----.   .--|  |-----.   |   |  .-----.--.--.----.-----.   |   |___ .---.|__|-----.-----. 
+ |       |     |  -__|   _|  -__|   |  _  |  -__|   |   |  |  _  |  |  |  __|  _  |   |       |  _  |  |__ --|  -  | 
+ |_______|__|__|_____|__| |_____|   |_____|_____|   |___|  |_____|_____|____|___._|   |_______|_____|__|_____|__|__| 
+ 
+ 
+"""
 gato = r"""   |\---/|
    | ,_, |
     \_`_/-..----.
@@ -134,6 +168,14 @@ livro = r"""        _.-"\
        `--"
 """
 
+def cidadepar(habitantes, qntdmelhorias, nomecidade):
+    if habitantes>=10000 and qntdmelhorias>= 5:
+        print(cidadefogos)
+        print("Meus parabéns, {} se tornou uma cidade!".format(nomecidade))
+        sleep(4)
+        acao = -1
+        return acao
+
 def sisdecimais(dinheiro): #Separa as casas decimais, deixa mais agradável aos olhos
     txt = f'R${dinheiro:_.2f}'
     txt = txt.replace('.',',').replace('_','.')
@@ -165,17 +207,19 @@ def eventoaleatorio(): #Evento aleatório com o passar dos meses
 def intro(): #Menu inicial
     print('\n'.join(l.center(colunas-1) for l in s.splitlines())) #Centraliza o titulo
     print(" ")
-    jogar = "[1] Jogar"
+    print(" ")
+    jogar = "Pressione qualquer outra tecla para jogar"
     jogar = jogar.center(colunas)
-    sair = "Pressione qualquer outra tecla para sair"
+    sair = "[0] Sair do Jogo"
     sair  = sair.center(colunas)
     print(jogar)
+    print(" ")
     print(sair)
     acao = input()
-    if acao == "1":
-        return True
-    else:
+    if acao == "0":
         return False
+    else:
+        return True
 
 def sistemacresc(habitantes, taxades, qntdmelhorias, felicidade): #Sistema de crescimento de habitantes e do "Desemprego"
     n = random.random()
@@ -568,8 +612,8 @@ def menu(nome, nomecidade): #Função com o menu do jogo
                     sleep(2)
                 else:
                     print("")
-                
                 habitantes, taxades = sistemacresc(habitantes, taxades, qntdmelhorias, felicidade)
+                acao = cidadepar(habitantes, qntdmelhorias, nomecidade)
             elif int(acao) == 5: #Sair
                 return 
             else:
@@ -578,6 +622,9 @@ def menu(nome, nomecidade): #Função com o menu do jogo
             print("Opção não encontrada, tente novamente.")
             acao = 0
         os.system('cls||clear')
+        
+def menucid(nome, nomecidade):
+    print("[WIP]")
         
 def main():
     os.system('cls||clear')
@@ -594,6 +641,7 @@ def main():
         nomecidade = introducao(nomecidade) #Chamando a introdução do jogo
         os.system('cls||clear')
         menu(nome, nomecidade)
+        menucid(nome, nomecidade)
     else:
         print("Fechando o jogo...")
         os.system('cls||clear')
