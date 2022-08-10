@@ -134,6 +134,11 @@ livro = r"""        _.-"\
        `--"
 """
 
+def sisdecimais(dinheiro): #Separa as casas decimais, deixa mais agradável aos olhos
+    txt = f'R${dinheiro:_.2f}'
+    txt = txt.replace('.',',').replace('_','.')
+    return(txt)
+
 def eventoaleatorio(): #Evento aleatório com o passar dos meses
     sorte = random.random()
     ganhou = False
@@ -243,8 +248,9 @@ def menu(nome, nomecidade): #Função com o menu do jogo
     dinheiro = sistemamon(x, dinheirosalvo)
     acao = 0
     while int(acao) >= 0:
+        texto_dinheiro = sisdecimais(dinheiro)
         os.system('cls||clear')
-        print("Você tem {},00 R$".format(dinheiro))
+        print("Você tem {}".format(texto_dinheiro))
         print("[1] Informações de", nomecidade)
         print("[2] Melhorias")
         print("[3] Políticas de Governo")
@@ -297,6 +303,8 @@ def menu(nome, nomecidade): #Função com o menu do jogo
                         sleep(2)
                         os.system('cls||clear')
                     else:
+                        print("Você tem {}".format(texto_dinheiro))
+                        print(" ")
                         print("Asfaltar ruas")
                         print(rua)
                         print("Custo: 30.000")
@@ -329,6 +337,8 @@ def menu(nome, nomecidade): #Função com o menu do jogo
                         os.system('cls||clear')
                     else:
                         os.system('cls||clear')
+                        print("Você tem {}".format(texto_dinheiro))
+                        print(" ")
                         print("Construir escola de ensino fundamental")
                         print(livro)
                         print("Custo: 150.000,00 R$")
@@ -363,6 +373,8 @@ def menu(nome, nomecidade): #Função com o menu do jogo
                         os.system('cls||clear')
                     else:
                         os.system('cls||clear')
+                        print("Você tem {}".format(texto_dinheiro))
+                        print(" ")
                         print("Construir parque arborizado")
                         print(arvore)
                         print("Custo: 2.000,00 R$")
@@ -397,6 +409,8 @@ def menu(nome, nomecidade): #Função com o menu do jogo
                         os.system('cls||clear')
                     else:
                         os.system('cls||clear')
+                        print("Você tem {}".format(texto_dinheiro))
+                        print(" ")
                         print("Construir sistema de saneamento")
                         print(cano)
                         print("Custo: 30.000,00 R$")
@@ -431,6 +445,8 @@ def menu(nome, nomecidade): #Função com o menu do jogo
                         os.system('cls||clear')
                     else:
                         os.system('cls||clear')
+                        print("Você tem {}".format(texto_dinheiro))
+                        print(" ")
                         print("Construir oficina de cêramica")
                         print(pote)
                         print("Custo: 25.000,00 R$")
@@ -564,7 +580,7 @@ def menu(nome, nomecidade): #Função com o menu do jogo
         os.system('cls||clear')
         
 def main():
-
+    os.system('cls||clear')
     acao = intro()
     os.system('cls||clear')
     if acao:
@@ -580,5 +596,6 @@ def main():
         menu(nome, nomecidade)
     else:
         print("Fechando o jogo...")
+        os.system('cls||clear')
         return
 main()
