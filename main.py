@@ -168,13 +168,14 @@ livro = r"""        _.-"\
        `--"
 """
 
-def cidadepar(habitantes, qntdmelhorias, nomecidade):
-    if habitantes>=10000 and qntdmelhorias>= 5:
-        print(cidadefogos)
-        print("Meus parabéns, {} se tornou uma cidade!".format(nomecidade))
-        sleep(4)
-        acao = -1
-        return acao
+def cidadepar(nomecidade): #Função que faz a passagem para o marco de cidade
+    os.system('cls||clear')
+    print(cidadefogos)
+    print("Meus parabéns, {} se tornou uma cidade!".format(nomecidade))
+    sleep(4)
+    acao = -1
+    os.system('cls||clear')
+    return acao
 
 def sisdecimais(dinheiro): #Separa as casas decimais, deixa mais agradável aos olhos
     txt = f'R${dinheiro:_.2f}'
@@ -284,14 +285,12 @@ def introducao(nomecidade): #Função de introdução ao jogador
     os.system('cls||clear')
     return(nomecidade) #Retorna o nome escolhido
 
-def menu(nome, nomecidade): #Função com o menu do jogo
+def menuvila(nomecidade, info): #Função com o menu para a vila
     asfalto = False; escolaef = False; parquearbo = False; sanea = False; ceram = False
-    lucro = 10000
-    dinheirosalvo = 50000
-    x = 0 ; meses = 0 ; felicidade = 50 ; qntdmelhorias = 0 ; taxades = 2 ; habitantes = 3000
+    x = 0 ; dinheirosalvo = info[0] ; felicidade = info[1] ; qntdmelhorias = info[2] ; taxades = info[3] ; habitantes = info[4] ; lucro = info[5] ; meses = info[6]
     dinheiro = sistemamon(x, dinheirosalvo)
-    acao = 0
-    while int(acao) >= 0:
+    acao = "0"
+    while int(acao) >= 0: #Loop para manter o menu 
         texto_dinheiro = sisdecimais(dinheiro)
         os.system('cls||clear')
         print("Você tem {}".format(texto_dinheiro))
@@ -613,7 +612,8 @@ def menu(nome, nomecidade): #Função com o menu do jogo
                 else:
                     print("")
                 habitantes, taxades = sistemacresc(habitantes, taxades, qntdmelhorias, felicidade)
-                acao = cidadepar(habitantes, qntdmelhorias, nomecidade)
+                if habitantes>=10000 and qntdmelhorias>= 5:
+                    acao = cidadepar(nomecidade)
             elif int(acao) == 5: #Sair
                 return 
             else:
@@ -622,8 +622,11 @@ def menu(nome, nomecidade): #Função com o menu do jogo
             print("Opção não encontrada, tente novamente.")
             acao = 0
         os.system('cls||clear')
+    info = dinheiro, felicidade, qntdmelhorias, taxades, habitantes, lucro, meses
+    return info
         
-def menucid(nome, nomecidade):
+def menucid(nomecidade, info): #Função com o menu para a cidade
+    dinheiro = info[0] ; felicidade = info[1] ; qntdmelhorias = info[2] ; taxades = info[3] ; habitantes = info[4] ; lucro = info[5] ; meses = info[6]
     print("[WIP]")
         
 def main():
@@ -640,8 +643,9 @@ def main():
             os.system('cls||clear') #Limpa o terminal
         nomecidade = introducao(nomecidade) #Chamando a introdução do jogo
         os.system('cls||clear')
-        menu(nome, nomecidade)
-        menucid(nome, nomecidade)
+        info = 50000, 50, 0, 2, 3000, 10000, 0
+        info = menuvila(nomecidade, info)
+        menucid(nomecidade, info)
     else:
         print("Fechando o jogo...")
         os.system('cls||clear')
