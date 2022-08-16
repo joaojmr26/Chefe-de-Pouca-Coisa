@@ -167,6 +167,63 @@ livro = r"""        _.-"\
       \(   _.-" 
        `--"
 """
+shopping = r"""        __.|.__
+    .-"'..':`..`"-.
+  .' .' .  :  . `. `.
+ / .   .   :   .   . \
+/_ _._ _.._:_.._ _._ _\
+  '   '    |    '   '
+           |
+           |
+           |
+           |
+           |
+         `=' """
+emas = r"""       .--.                   .---.
+   .---|__|           .-.     |~~~|
+.--|===|--|_          |_|     |~~~|--.
+|  |===|  |'\     .---!~|  .--|   |--|
+|%%|   |  |.'\    |===| |--|%%|   |  |
+|%%|   |  |\.'\   |   | |__|  |   |  |
+|  |   |  | \  \  |===| |==|  |   |  |
+|  |   |__|  \.'\ |   |_|__|  |~~~|__|
+|  |===|--|   \.'\|===|~|--|%%|~~~|--|
+^--^---'--^    `-'`---^-^--^--^---'--'"""
+centroeventos = r"""   _______       __
+ /   ------.   / ._`_
+|  /         ~--~    \
+| |             __    `.____________________ _^-----^
+| |  I=|=======/--\=========================| o o o |
+\ |  I=|=======\__/=========================|_o_o_o_|
+ \|                   /                       ~    ~
+   \       .---.    .
+     -----'     ~~''"""
+catavento = r"""                      |-_'-'      
+             _        |-_'/        
+            /;-,_     |-_'        
+           /-.-;,-,   |'          
+          /;-;-;-;_;_/|\_ _ _ _ _ 
+                    |_0_|`-;-;-;,|   
+                    |\|/| `-;-;-'
+                    -_| |     '-'
+                   /-_| |
+                  ,'-_| |
+                 /-'-_| |
+      _..,__________|___|_______..,_   """
+tecnologia = r"""   ._________________.
+   |.---------------.|
+   ||               ||
+   ||   -._ .-.     ||
+   ||   -._| | |    ||
+   ||   -._|"|"|    ||
+   ||   -._|.-.|    ||
+   ||_______________||
+   /.-.-.-.-.-.-.-.-.\
+  /.-.-.-.-.-.-.-.-.-.\
+ /.-.-.-.-.-.-.-.-.-.-.\
+/______/__________\___o_\
+\_______________________/'"""
+
 
 def cidadepar(nomecidade): #Função que faz a passagem para o marco de cidade
     os.system('cls||clear')
@@ -175,7 +232,7 @@ def cidadepar(nomecidade): #Função que faz a passagem para o marco de cidade
     sleep(4)
     acao = -1
     os.system('cls||clear')
-    return acao
+    return acao, 1
 
 def sisdecimais(dinheiro): #Separa as casas decimais, deixa mais agradável aos olhos
     txt = f'R${dinheiro:_.2f}'
@@ -286,7 +343,7 @@ def introducao(nomecidade): #Função de introdução ao jogador
     return(nomecidade) #Retorna o nome escolhido
 
 def menuvila(nomecidade, info): #Função com o menu para a vila
-    asfalto = False; escolaef = False; parquearbo = False; sanea = False; ceram = False
+    asfalto = False; escolaef = False; parquearbo = False; sanea = False; ceram = False ; lvl = 1
     x = 0 ; dinheirosalvo = info[0] ; felicidade = info[1] ; qntdmelhorias = info[2] ; taxades = info[3] ; habitantes = info[4] ; lucro = info[5] ; meses = info[6]
     dinheiro = sistemamon(x, dinheirosalvo)
     acao = "0"
@@ -298,11 +355,11 @@ def menuvila(nomecidade, info): #Função com o menu para a vila
         print("[2] Melhorias")
         print("[3] Políticas de Governo")
         print("[4] Passar o mês")
-        print("[5] Sair")
+        print("[0] Sair")
         acao = input()
         os.system('cls||clear')
-        if acao == "1" or acao == "2" or acao == "3" or acao == "4" or acao == "5": 
-            if int(acao) == 1: #Informações da Cidade
+        if acao == "1" or acao == "2" or acao == "3" or acao == "4" or acao == "5" or acao == "0": 
+            if int(acao) == 1: #Informações da Vila
                 print(vila)
                 felicidade = sistemafelicidade(felicidade)
                 carinha = sistemacarinha(felicidade)
@@ -613,9 +670,368 @@ def menuvila(nomecidade, info): #Função com o menu para a vila
                     print("")
                 habitantes, taxades = sistemacresc(habitantes, taxades, qntdmelhorias, felicidade)
                 if habitantes>=10000 and qntdmelhorias>= 5:
+                    acao, lvl = cidadepar(nomecidade)
+            elif int(acao) == 0: #Sair
+                info = dinheiro, felicidade, qntdmelhorias, taxades, habitantes, lucro, meses, lvl
+                return info
+            else:
+                print("Opção não encontrada, tente novamente.")
+        else:
+            print("Opção não encontrada, tente novamente.")
+            acao = 0
+        os.system('cls||clear')
+    info = dinheiro, felicidade, qntdmelhorias, taxades, habitantes, lucro, meses, lvl
+    return info
+        
+def menucid(nomecidade, info): #Função com o menu para a cidade
+    shop = False ; escolaem = False ; centroeve = False ; peolico = False ; centrotec = False
+    x = 0 ; dinheirosalvo = info[0] ; felicidade = info[1] ; qntdmelhorias = info[2] ; taxades = info[3] ; habitantes = info[4] ; lucro = info[5] ; meses = info[6]
+    dinheiro = sistemamon(x, dinheirosalvo)
+    acao = "0"
+    while int(acao) >= 0: #Loop para manter o menu 
+        texto_dinheiro = sisdecimais(dinheiro)
+        os.system('cls||clear')
+        print("Você tem {}".format(texto_dinheiro))
+        print("[1] Informações de", nomecidade)
+        print("[2] Melhorias")
+        print("[3] Políticas de Governo")
+        print("[4] Passar o mês")
+        print("[0] Sair")
+        acao = input()
+        os.system('cls||clear')
+        if acao == "1" or acao == "2" or acao == "3" or acao == "4" or acao == "5" or acao == "0": 
+            if int(acao) == 1: #Informações da Cidade
+                print(cidade)
+                felicidade = sistemafelicidade(felicidade)
+                carinha = sistemacarinha(felicidade)
+                print("Tempo de Governo: {} meses".format(meses))
+                print("Felicidade dos Habitantes: {}/100{}".format(felicidade,carinha))
+                print("Quantidade de melhorias feitas: {}".format(qntdmelhorias))
+                print("Taxa de desemprego: {}%".format(taxades))
+                print("Quantidade de Habitantes: {}".format(habitantes))
+                print("[0] Voltar")
+                acao = input()
+                os.system('cls||clear')
+            elif int(acao) == 2: #Melhorias
+                if shop:
+                    print("[#] Construir Shopping")
+                else:
+                    print("[1] Construir Shopping")
+                if escolaem:
+                    print("[#] Construir escola de ensino médio")
+                else: 
+                    print("[2] Construir escola de ensino médio")
+                if centroeve:
+                    print("[#] Construir centro de eventos")
+                else:
+                    print("[3] Construir centro de eventos")
+                if peolico:
+                    print("[#] Construir parque eólico")
+                else:
+                    print("[4] Construir parque eólico")
+                if centrotec:
+                    print("[#] Criar Centro tecnológico")
+                    print("[6] Inovações")
+                else:
+                    print("[5] Criar Centro tecnológico")
+                    print("[#] #########")
+                print("[0] Voltar")
+                acao2 = int(input())
+                if acao2 == 0:
+                    acao = acao2
+                elif acao2 == 1: #Shopping menu adicional
+                    os.system('cls||clear')
+                    if shop:
+                        print("Melhoria ja comprada")
+                        sleep(2)
+                        os.system('cls||clear')
+                    else:
+                        print("Você tem {}".format(texto_dinheiro))
+                        print(" ")
+                        print("Construir Shopping")
+                        print(shopping)
+                        print("Custo: 100.000,00 R$")
+                        print("Aumenta a felicidade em 10")
+                        print("Gera um lucro de 5000,00 R$ por mês")
+                        print("Aumenta o crescimento da cidade, por influênciar a modernização do que está ao seu redor")
+                        print("[1] Comprar")
+                        print("[0] Voltar")
+                        acao3 = int(input())
+                        os.system('cls||clear')
+                        if acao3 == 1: #Comprar 
+                            if dinheiro >= 100000:
+                                x = -100000
+                                dinheiro = sistemamon(x, dinheiro)
+                                dinheirosalvo = dinheiro
+                                felicidade += 10
+                                lucro += 5000
+                                qntdmelhorias += 1
+                                shop = True
+                                print("Comprado!")
+                                sleep(1)
+                            else:
+                                print("Não tem o dinheiro necessário.")
+                                print("Voltando ao menu")
+                                sleep(2)
+                elif acao2 == 2: #Escola EM menu adicional
+                    os.system('cls||clear')
+                    if escolaem:
+                        print("Melhoria ja comprada")
+                        sleep(2)
+                        os.system('cls||clear')
+                    else:
+                        os.system('cls||clear')
+                        print("Você tem {}".format(texto_dinheiro))
+                        print(" ")
+                        print("Construir escola de ensino médio")
+                        print(emas)
+                        print("Custo: 250.000,00 R$")
+                        print("Aumenta a felicidade em 15")
+                        print("Gera um lucro de 10.000,00 R$ por mês")
+                        print("[1] Comprar")
+                        print("[0] Voltar")
+                        acao3 = int(input())
+                        os.system('cls||clear')
+                        if acao3 == 1: #Comprar
+                            if dinheiro >= 250000:
+                                x = -250000
+                                dinheiro = sistemamon(x, dinheiro)
+                                dinheirosalvo = dinheiro
+                                felicidade += 15
+                                lucro += 10000
+                                qntdmelhorias += 1
+                                escolaem = True
+                                print("Comprado!")
+                                sleep(1)
+                            else:
+                                print("Não tem o dinheiro necessário.")
+                                print("Voltando ao menu")
+                                sleep(2)
+                        else:
+                            acao = acao3
+                elif acao2 == 3: #Centro de Eventos menu adicional
+                    os.system('cls||clear')
+                    if centroeve:
+                        print("Melhoria ja comprada")
+                        sleep(2)
+                        os.system('cls||clear')
+                    else:
+                        os.system('cls||clear')
+                        print("Você tem {}".format(texto_dinheiro))
+                        print(" ")
+                        print("Construir Centro de Eventos")
+                        print(centroeventos)
+                        print("Custo: 50.000,00 R$")
+                        print("Aumenta a felicidade em 25")
+                        print("Custo de manutenção de 500,00 R$ por mês")
+                        print("[1] Comprar")
+                        print("[0] Voltar")
+                        acao3 = int(input())
+                        os.system('cls||clear')
+                        if acao3 == 1: #Comprar
+                            if dinheiro >= 50000:
+                                x = -50000
+                                dinheiro = sistemamon(x, dinheiro)
+                                dinheirosalvo = dinheiro
+                                lucro -= 500
+                                felicidade += 25
+                                qntdmelhorias += 1
+                                centroeve = True
+                                print("Comprado!")
+                                sleep(1)
+                            else:
+                                print("Não tem o dinheiro necessário.")
+                                print("Voltando ao menu")
+                                sleep(2)
+                        else:
+                            acao = acao3
+                elif acao2 == 4: #Parque Eólico menu adicional
+                    os.system('cls||clear')
+                    if peolico:
+                        print("Melhoria ja comprada")
+                        sleep(2)
+                        os.system('cls||clear')
+                    else:
+                        os.system('cls||clear')
+                        print("Você tem {}".format(texto_dinheiro))
+                        print(" ")
+                        print("Construir parque eólico")
+                        print(catavento)
+                        print("Custo: 100.000,00 R$")
+                        print("Aumenta a felicidade em 5")
+                        print("Custo de manutenção de 5.350,00 R$ por mês")
+                        print("[1] Comprar")
+                        print("[0] Voltar")
+                        acao3 = int(input())
+                        os.system('cls||clear')
+                        if acao3 == 1: #Comprar
+                            if dinheiro >= 100000:
+                                x = -100000
+                                dinheiro = sistemamon(x, dinheiro)
+                                dinheirosalvo = dinheiro
+                                felicidade += 5
+                                lucro -= 5350
+                                qntdmelhorias += 1
+                                peolico = True
+                                print("Comprado!")
+                                sleep(1)
+                            else:
+                                print("Não tem o dinheiro necessário.")
+                                print("Voltando ao menu")
+                                sleep(2)
+                        else:
+                            acao = acao3
+                elif acao2 == 5: #Centro Tecnológico menu adicional
+                    os.system('cls||clear')
+                    if centrotec:
+                        print("Melhoria ja comprada")
+                        sleep(2)
+                        os.system('cls||clear')
+                    else:
+                        os.system('cls||clear')
+                        print("Você tem {}".format(texto_dinheiro))
+                        print(" ")
+                        print("Construir Centro Tecnológico")
+                        print(tecnologia)
+                        print("Custo: 350.000,00 R$")
+                        print("Aumenta a felicidade em 10")
+                        print("Gera um lucro de 12.500,00 R$ por mês")
+                        print("[1] Comprar")
+                        print("[0] Voltar")
+                        acao3 = int(input())
+                        os.system('cls||clear')
+                        if acao3 == 1: #Comprar
+                            if dinheiro >= 350000:
+                                x = -350000
+                                dinheiro = sistemamon(x, dinheiro)
+                                dinheirosalvo = dinheiro
+                                lucro += 12500
+                                felicidade += 10
+                                qntdmelhorias += 1
+                                centrotec = True
+                                print("Comprado!")
+                                sleep(1)
+                            else:
+                                print("Não tem o dinheiro necessário.")
+                                print("Voltando ao menu")
+                                sleep(2)
+                        else:
+                            acao = acao3
+            elif int(acao) == 3: # Políticas de Governo
+                print("[1] Legalizar a maconha")
+                print("[2] Reduzir impostos sobre atividades religiosas")
+                print("[3] Incentivar a pesquisa agrícola")
+                print("[4] Proibir o uso de caixas de som em praias públicas")
+                print("[5] Regulamentar a extração de pérolas")
+                print("[0] Voltar")
+                acao2 = int(input())
+                if acao2 == 0:
+                    acao = acao2
+                elif acao2 == 1: #Legalizar a maconha
+                    os.system('cls||clear')
+                    print("Legalizar a maconha")
+                    print(gato)
+                    print("Diminui a felicidade em 15")
+                    print("Gera lucro pelo imposto sobre a maconha")
+                    print("[1] Implantar")
+                    print("[0] Voltar")
+                    acao3 = int(input())
+                    os.system('cls||clear')
+                    if acao3 == 1: #Implantar
+                        felicidade -= 15
+                        lucro += 500
+                    else:
+                        acao = acao3
+                elif acao2 == 2: #Reduzir impostos religiosos
+                    os.system('cls||clear')
+                    print("Reduzir impostos sobre atividades religiosas")
+                    print(cigarro)
+                    print("Aumenta a felicidade em 15")
+                    print("Diminui a arrecadação de impostos")
+                    print("[1] Implantar")
+                    print("[0] Voltar")
+                    acao3 = int(input())
+                    os.system('cls||clear')
+                    if acao3 == 1: #Implantar
+                        felicidade += 15
+                        lucro -= 1000
+                    else:
+                        acao = acao3
+                elif acao2 == 3: #Incentivar a pesquisa agrícola
+                    os.system('cls||clear')
+                    print("Incentivar a pesquisa agrícola")
+                    print(alcool)
+                    print("Diminui a felicidade em 5")
+                    print("Aumenta os gastos com pesquisas")
+                    print("[1] Implantar")
+                    print("[0] Voltar")
+                    acao3 = int(input())
+                    os.system('cls||clear')
+                    if acao3 == 1: #Implantar
+                        felicidade -= 5
+                        lucro -= 750
+                    else:
+                        acao = acao3
+                elif acao2 == 4: #Proibir o uso de caixas de som em praias públicas
+                    os.system('cls||clear')
+                    print("Proibir o uso de caixas de som em praias públicas")
+                    print(trem)
+                    print("Aumenta a felicidade em 5")
+                    print("Não tem efeito sobre a economia")
+                    print("[1] Implantar")
+                    print("[0] Voltar")
+                    acao3 = int(input())
+                    os.system('cls||clear')
+                    if acao3 == 1: #Implantar
+                        felicidade += 5
+                        lucro += 0
+                    else:
+                        acao = acao3
+                elif acao2 == 5: #Regulamentar a extração de pérolas
+                    os.system('cls||clear')
+                    print("Regulamentar a extração de pérolas")
+                    print(trem)
+                    print("Diminui a felicidade em 15")
+                    print("Cria um imposto sobre a extração de pérolas")
+                    print("[1] Implantar")
+                    print("[0] Voltar")
+                    acao3 = int(input())
+                    os.system('cls||clear')
+                    if acao3 == 1: #Implantar
+                        felicidade -= 15
+                        lucro += 100
+                    else:
+                        acao = acao3
+                os.system('cls||clear')
+            elif int(acao) == 4: #Passar o mês
+                meses += 1
+                dinheiro += lucro 
+                print(relogio)
+                print("Passando o mês.")
+                sleep(1)
+                os.system('cls||clear')
+                print(relogio)
+                print("Passando o mês..")
+                sleep(1)
+                os.system('cls||clear')
+                print(relogio)
+                print("Passando o mês...")
+                sleep(1)
+                os.system('cls||clear')
+                sorte = eventoaleatorio()
+                if sorte == "sortepouca":
+                    felicidade += 5
+                    sleep(2)
+                elif sorte == "sortudo":
+                    dinheiro += 15000
+                    sleep(2)
+                else:
+                    print("")
+                habitantes, taxades = sistemacresc(habitantes, taxades, qntdmelhorias, felicidade)
+                if habitantes>=10000 and qntdmelhorias>= 5:
                     acao = cidadepar(nomecidade)
-            elif int(acao) == 5: #Sair
-                return 
+            elif int(acao) == 0: #Sair
+                return 0
             else:
                 print("Opção não encontrada, tente novamente.")
         else:
@@ -624,10 +1040,6 @@ def menuvila(nomecidade, info): #Função com o menu para a vila
         os.system('cls||clear')
     info = dinheiro, felicidade, qntdmelhorias, taxades, habitantes, lucro, meses
     return info
-        
-def menucid(nomecidade, info): #Função com o menu para a cidade
-    dinheiro = info[0] ; felicidade = info[1] ; qntdmelhorias = info[2] ; taxades = info[3] ; habitantes = info[4] ; lucro = info[5] ; meses = info[6]
-    print("[WIP]")
         
 def main():
     os.system('cls||clear')
@@ -643,9 +1055,11 @@ def main():
             os.system('cls||clear') #Limpa o terminal
         nomecidade = introducao(nomecidade) #Chamando a introdução do jogo
         os.system('cls||clear')
-        info = 50000, 50, 0, 2, 3000, 10000, 0
+        info = [50000, 50, 0, 2, 3000, 10000, 0, 0]
         info = menuvila(nomecidade, info)
-        menucid(nomecidade, info)
+        lvl = info[7]
+        if lvl == 2:
+            info = menucid(nomecidade, info)
     else:
         print("Fechando o jogo...")
         os.system('cls||clear')
