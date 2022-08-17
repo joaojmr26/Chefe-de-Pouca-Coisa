@@ -223,7 +223,57 @@ tecnologia = r"""   ._________________.
  /.-.-.-.-.-.-.-.-.-.-.\
 /______/__________\___o_\
 \_______________________/'"""
-
+maconha = r"""    .===. (
+    |   |  )
+    |   | (
+    |   | )
+    |   \*/
+  ,'    //.
+ :~~~~~//~~;      
+  `.  // .'
+  `-------'"""
+cruz = r"""               |
+           \       /
+             .---. 
+        '-.  |   |  .-'
+          ___|   |___
+     -=  [           ]  =-
+         `---.   .---' 
+      __||__ |   | __||__
+      '-..-' |   | '-..-'
+        ||   |   |   ||
+        ||_.-|   |-,_||
+      .-"`   `"`'`   `"-.
+    .'                   '."""
+plantacao = r"""      ,,,                      ,,,
+     {{{}}    ,,,             {{{}}    
+  ,,, ~Y~    {{{}},,,      ,,, ~Y~   
+ {{}}} |/,,,  ~Y~{{}}}    {{}}} |/,,,  
+  ~Y~ \|{{}}}/\|/ ~Y~  ,,, ~Y~ \|{{}}}
+  \|/ \|/~Y~  \|,,,|/ {{}}}\|/ \|/~Y~ 
+  \|/ \|/\|/  \{{{}}/  ~Y~ \|/ \|/\|/  
+  \|/\\|/\|/ \\|~Y~//  \|/ \|/\\|/\|/ 
+  \|//\|/\|/,\\|/|/|// \|/ \|//\|/\|/
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"""
+praia = r"""          |
+        \ _ /
+      -= (_) =-
+        /   \         _\/_
+          |           //o\  _\/_
+   _____ _ __ __ ____ _ | __/o\\ _
+ =-=-_-__=_-= _=_=-=_,-'|"'""-|-,_
+  =- _=-=- -_=-=_,-"          |
+   =- =- -=.--'"""
+ostra = r"""     ___---__---___
+   --              --
+  ~                  ~
+ ~~                  ~~
+(__       ,--,       __)
+   ====- |#   | -====
+(~~       `--'         )
+\~~--___        ___--~~/ 
+ ~~--___---__---___--~~
+       --------"""
 
 def cidadepar(nomecidade): #Função que faz a passagem para o marco de cidade
     os.system('cls||clear')
@@ -930,7 +980,7 @@ def menucid(nomecidade, info): #Função com o menu para a cidade
                 elif acao2 == 1: #Legalizar a maconha
                     os.system('cls||clear')
                     print("Legalizar a maconha")
-                    print(gato)
+                    print(maconha)
                     print("Diminui a felicidade em 15")
                     print("Gera lucro pelo imposto sobre a maconha")
                     print("[1] Implantar")
@@ -945,7 +995,7 @@ def menucid(nomecidade, info): #Função com o menu para a cidade
                 elif acao2 == 2: #Reduzir impostos religiosos
                     os.system('cls||clear')
                     print("Reduzir impostos sobre atividades religiosas")
-                    print(cigarro)
+                    print(cruz)
                     print("Aumenta a felicidade em 15")
                     print("Diminui a arrecadação de impostos")
                     print("[1] Implantar")
@@ -960,7 +1010,7 @@ def menucid(nomecidade, info): #Função com o menu para a cidade
                 elif acao2 == 3: #Incentivar a pesquisa agrícola
                     os.system('cls||clear')
                     print("Incentivar a pesquisa agrícola")
-                    print(alcool)
+                    print(plantacao)
                     print("Diminui a felicidade em 5")
                     print("Aumenta os gastos com pesquisas")
                     print("[1] Implantar")
@@ -975,7 +1025,7 @@ def menucid(nomecidade, info): #Função com o menu para a cidade
                 elif acao2 == 4: #Proibir o uso de caixas de som em praias públicas
                     os.system('cls||clear')
                     print("Proibir o uso de caixas de som em praias públicas")
-                    print(trem)
+                    print(praia)
                     print("Aumenta a felicidade em 5")
                     print("Não tem efeito sobre a economia")
                     print("[1] Implantar")
@@ -990,7 +1040,7 @@ def menucid(nomecidade, info): #Função com o menu para a cidade
                 elif acao2 == 5: #Regulamentar a extração de pérolas
                     os.system('cls||clear')
                     print("Regulamentar a extração de pérolas")
-                    print(trem)
+                    print(ostra)
                     print("Diminui a felicidade em 15")
                     print("Cria um imposto sobre a extração de pérolas")
                     print("[1] Implantar")
