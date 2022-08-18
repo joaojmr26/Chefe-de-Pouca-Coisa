@@ -274,6 +274,72 @@ ostra = r"""     ___---__---___
 \~~--___        ___--~~/ 
  ~~--___---__---___--~~
        --------"""
+pesquisador = r"""                   __
+                 .'  `'.
+                /  _    |
+                #_/.\==/.\
+               (, \_/ \\_/
+                |    -' |
+                \   '=  /
+                /`-.__.'
+             .-'`-.___|__
+            /    \       `."""
+pesquisadort = r"""                   __
+                 .'  `'.
+                /  _    |
+                #_/.\==/.\
+               (, \_/ \\_/
+                |    -' |
+                \   ==  /
+                /`-.__.'
+             .-'`-.___|__
+            /    \       `."""
+
+def inova(dinheiro): #Função para pesquisas
+   l = ("Tijolo de casca de acerola", "Milho transgênico", "Mini porco de estimação", "Guarda chuva aprova d'água", "Remédio para calvície",
+        "Refrigerante Diet", "Vacina contra antivacina", "Caneca do bolsonaro", "Toalha do lula","Levantador de bilola", "Parafuseta limpa")
+   x = 0 ; lucro = 0 ; felicidade = 0
+   while x>= 0:
+      #texto_dinheiro = sisdecimais(dinheiro)
+      print(tecnologia)
+      print("Dê um pequeno subsídio para os cientistas e eles produziram coisas muito úteis! (Ou não)")
+      print("[1] Investir 50.000,00 R$")
+      print("[0] Voltar")
+      acao = input()
+      if acao == "1":
+         if dinheiro >= 50000:
+            os.system('cls||clear')
+            print(pesquisador)
+            print("Pesquisando...")
+            sleep(2)
+            os.system('cls||clear')
+            a = random.randint(0, 10)
+            if a>6:
+               print(pesquisador)
+               print("Parabéns, seus pesquisadores descobriram a {}".format(l[a]))
+               lucro += 5000
+               felicidade += 5
+               sleep(3)
+               os.system('cls||clear')
+            else:
+               os.system('cls||clear')
+               print(pesquisadort)
+               print("Seus pesquisadores não conseguiram desenvolver o {}".format(l[a]))
+               sleep(3)
+               os.system('cls||clear')
+         else:
+            print("Você não tem dinheiro pra isso...")
+            os.system('cls||clear')
+            sleep(2)
+      elif acao == "0":
+         print("Voltando...")
+         sleep(1)
+         os.system('cls||clear')
+         return(lucro, felicidade)
+      else:
+         print("Opção não encontrada...")
+         os.system('cls||clear')
+         sleep(2)
 
 def cidadepar(nomecidade): #Função que faz a passagem para o marco de cidade
     os.system('cls||clear')
@@ -313,7 +379,9 @@ def eventoaleatorio(): #Evento aleatório com o passar dos meses
             return "sortepouca"
 
 def intro(): #Menu inicial
-    print('\n'.join(l.center(colunas-1) for l in s.splitlines())) #Centraliza o titulo
+    CRED = '\033[92m' #Cor verde
+    CEND = '\033[0m' #Volta ao normal
+    print(CRED +'\n'.join(l.center(colunas-1) for l in s.splitlines()) + CEND) #Titulo centralizado com cores
     print(" ")
     print(" ")
     jogar = "Pressione qualquer outra tecla para jogar"
@@ -967,6 +1035,8 @@ def menucid(nomecidade, info): #Função com o menu para a cidade
                                 sleep(2)
                         else:
                             acao = acao3
+                elif acao2 == 6: #Inovações menu adicional
+                    inova(dinheiro) #Chama a função de pesquisas
             elif int(acao) == 3: # Políticas de Governo
                 print("[1] Legalizar a maconha")
                 print("[2] Reduzir impostos sobre atividades religiosas")
