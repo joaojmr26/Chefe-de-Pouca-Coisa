@@ -1,1 +1,0 @@
-Sim, eu baixei do notion.
