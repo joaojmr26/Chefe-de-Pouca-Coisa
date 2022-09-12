@@ -1,4 +1,7 @@
 # Chefe de Pouca Coisa
-### é um jogo de texto interativo feito em python que consiste em você melhorar sua vila 
+### Seja o prefeito de algum lugar *(o que definitivamente não é muita coisa)*
 
-<img src="https://user-images.githubusercontent.com/47362309/184042260-979be0d3-56e9-4897-8ed0-50bdd07865cb.png"> 
+![CDPC](https://user-images.githubusercontent.com/47362309/189714808-2cb70d88-6d5b-48f6-9e24-d1cb6800e2d1.png)
+
+### Feito totalmente em python, com requintes de programação iniciante
+### [Documentação](https://joaojmr26.github.io/Doc-CDPC/), explicando um pouco do jogo e como ele funciona
