@@ -168,18 +168,16 @@ livro = r"""        _.-"\
       \(   _.-" 
        `--"
 """
-shopping = r"""        __.|.__
-    .-"'..':`..`"-.
-  .' .' .  :  . `. `.
- / .   .   :   .   . \
-/_ _._ _.._:_.._ _._ _\
-  '   '    |    '   '
-           |
-           |
-           |
-           |
-           |
-         `=' """
+shopping = r"""                    _.--._
+               _.-.'      `.-._
+             .' ./`--...--' \  `.
+    .-.      `.'.`--.._..--'   .'
+_..'.-.`-._.'( (-..__    __..-'
+ >.'   `-...' ) )    ````
+ '           / /
+        .._.'.'        
+         >.-'
+         '"""
 emas = r"""       .--.                   .---.
    .---|__|           .-.     |~~~|
 .--|===|--|_          |_|     |~~~|--.
@@ -296,11 +294,11 @@ pesquisadort = r"""                   __
              .-'`-.___|__
             /    \       `."""
 
-def salvar(info):
+def salvar(info): #Função para salvar o jogo
     with open('save', 'wb') as fp:
         pickle.dump(info, fp)
 
-def carregar():
+def carregar(): #Função para carregar o jogo
     try:
         with open('save', 'rb') as fp:
             info = pickle.load(fp)
@@ -374,29 +372,34 @@ def sisdecimais(dinheiro): #Separa as casas decimais, deixa mais agradável aos 
     txt = txt.replace('.',',').replace('_','.')
     return(txt)
 
-def eventoaleatorio(): #Evento aleatório com o passar dos meses
-    sorte = random.random()
-    ganhou = False
-    if ganhou and sorte>0.3:
-        ganhou = False
-    elif ganhou and sorte<0.3:
-        ganhou = True
+def eventoaleatorio(ganhou): #Evento aleatório com o passar dos meses
+    sorte = random.randrange(0,11)
+    if ganhou == True:
+        if sorte>=4 and ganhou == True:
+            ganhou = False
+            return "nada",ganhou
+        else:
+            ganhou = True
+            return "nada", ganhou
     else:
-        if sorte>0.9:
+        if sorte>9:
             os.system('cls||clear')
             print(sortudo)
-            ganhou = True
             print(" ")
-            print("Um admirador quis te ajudar e te fez uma doação de 15000 R$")
-            return "sortudo"
-        elif sorte<=0.4 and sorte>= 0.3:
-            os.system('cls||clear')
+            print("Um admirador quis te ajudar e te fez uma doação de 15.000,00 R$")
             ganhou = True
+            return "sortudo", ganhou
+        elif sorte<3:
+            os.system('cls||clear')
             print(sortepouca)
             print(" ")
             print("Os habitantes estão mais felizes por aproveitarem promoções que estão acontecendo!")
-            return "sortepouca"
-
+            ganhou = True
+            return "sortepouca", ganhou
+        else:
+            ganhou = False
+            return "nada", ganhou
+    
 def intro(): #Menu inicial
     CRED = '\033[92m' #Cor verde
     CEND = '\033[0m' #Volta ao normal
@@ -486,7 +489,7 @@ def introducao(nomecidade): #Função de introdução ao jogador
     return(nomecidade) #Retorna o nome escolhido
 
 def menuvila(nomecidade, info): #Função com o menu para a vila
-    asfalto = info[10] ; escolaef = info[11]; parquearbo = info[12]; sanea = info[13]; ceram = info[14] ; lvl = info[7]
+    asfalto = info[10] ; escolaef = info[11]; parquearbo = info[12]; sanea = info[13]; ceram = info[14] ; lvl = info[7] ; ganhou = False
     x = 0 ; dinheirosalvo = info[0] ; felicidade = info[1] ; qntdmelhorias = info[2] ; taxades = info[3] ; habitantes = info[4] ; lucro = info[5] ; meses = info[6]
     dinheiro = sistemamon(x, dinheirosalvo)
     acao = "0"
@@ -788,6 +791,8 @@ def menuvila(nomecidade, info): #Função com o menu para a vila
                         acao = acao3
                 os.system('cls||clear')
             elif int(acao) == 4: #Passar o mês
+                info[10] = asfalto ; info[11] = escolaef; info[12] = parquearbo ; info[13] = sanea; info[14] = ceram
+                info = [dinheiro, felicidade, qntdmelhorias, taxades, habitantes, lucro, meses, lvl, info[8], info[9], info[10], info[11], info[12], info[13], info[14]]
                 salvar(info)
                 meses += 1
                 dinheiro += lucro 
@@ -803,7 +808,7 @@ def menuvila(nomecidade, info): #Função com o menu para a vila
                 print("Passando o mês...")
                 sleep(1)
                 os.system('cls||clear')
-                sorte = eventoaleatorio()
+                sorte, ganhou = eventoaleatorio(ganhou)
                 if sorte == "sortepouca":
                     felicidade += 5
                     sleep(2)
@@ -816,6 +821,7 @@ def menuvila(nomecidade, info): #Função com o menu para a vila
                 if habitantes>=10000 and qntdmelhorias>= 5:
                     acao, lvl = cidadepar(nomecidade)
             elif int(acao) == 0: #Sair
+                info[10] = asfalto ; info[11] = escolaef; info[12] = parquearbo ; info[13] = sanea; info[14] = ceram
                 info = [dinheiro, felicidade, qntdmelhorias, taxades, habitantes, lucro, meses, lvl, info[8], info[9], info[10], info[11], info[12], info[13], info[14]]
                 salvar(info)
                 return info
@@ -1158,6 +1164,8 @@ def menucid(nomecidade, info): #Função com o menu para a cidade
                         acao = acao3
                 os.system('cls||clear')
             elif int(acao) == 4: #Passar o mês
+                info[10] = shop ; info[11] = escolaem ; info[12] = centroeve ; info[13] = peolico ; info[14] = centrotec
+                info = [dinheiro, felicidade, qntdmelhorias, taxades, habitantes, lucro, meses, lvl, info[8], info[9], info[10], info[11], info[12], info[13], info[14]]
                 salvar(info)
                 meses += 1
                 dinheiro += lucro 
@@ -1186,7 +1194,10 @@ def menucid(nomecidade, info): #Função com o menu para a cidade
                 if habitantes>=50000 and qntdmelhorias>= 12:
                     acao = cidadepar(nomecidade)
             elif int(acao) == 0: #Sair
-                return 0
+                info[10] = shop ; info[11] = escolaem ; info[12] = centroeve ; info[13] = peolico ; info[14] = centrotec
+                info = [dinheiro, felicidade, qntdmelhorias, taxades, habitantes, lucro, meses, lvl, info[8], info[9], info[10], info[11], info[12], info[13], info[14]]
+                salvar(info)
+                return info
             else:
                 print("Opção não encontrada, tente novamente.")
         else:
@@ -1213,16 +1224,9 @@ def main():
             os.system('cls||clear') #Limpa o terminal
             info[7] = 1
         info[8] = introducao(nomecidade) #Chamando a introdução do jogo
-        info[9] = nome
+        info[9] = nome ; nomecidade = info[8] ; lvl = info[7]
         os.system('cls||clear')
-        nomecidade = info[8]
-        lvl = info[7]
-        if lvl == 1:
-            info = menuvila(nomecidade, info) #Chama o jogo como vila
-        elif lvl == 2:
-            info = menucid(nomecidade, info) #Chama o jogo como cidade
-            
-    elif lvl == 1:
+    if lvl == 1:
         nomecidade = info[8]
         info = menuvila(nomecidade, info) #Continua o jogo como vila
     elif lvl == 2:
